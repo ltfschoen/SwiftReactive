@@ -51,6 +51,7 @@
 		49CAF3C91C21285300708CFF /* SwiftReactiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReactiveUITests.swift; sourceTree = "<group>"; };
 		49CAF3CB1C21285300708CFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49CAF3D71C21298000708CFF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		49CAF3D91C212EA300708CFF /* ObjCBridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCBridging.h; sourceTree = "<group>"; };
 		5D4B45F98A5BDEDC778C2EAE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "SwiftReactive/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		755F86CBBD703346267362F2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "SwiftReactive/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +122,7 @@
 				49CAF3B01C21285200708CFF /* Assets.xcassets */,
 				49CAF3B21C21285200708CFF /* LaunchScreen.storyboard */,
 				49CAF3B51C21285200708CFF /* Info.plist */,
+				49CAF3D91C212EA300708CFF /* ObjCBridging.h */,
 			);
 			path = SwiftReactive;
 			sourceTree = "<group>";
@@ -483,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukeschoen.SwiftReactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = SwiftReactive/ObjCBridging.h;
 			};
 			name = Debug;
 		};
@@ -495,6 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukeschoen.SwiftReactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = SwiftReactive/ObjCBridging.h;
 			};
 			name = Release;
 		};
