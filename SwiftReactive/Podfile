@@ -1,0 +1,6 @@
+platform :ios, '9.0'
+use_frameworks!
+xcodeproj '/Users/Ls/code/apps/SwiftReactive/SwiftReactive.xcodeproj'
+pod 'ReactiveKit', '~> 1.0'
+pod 'ReactiveUIKit', '~> 1.0'
+pod 'ReactiveFoundation', '~> 1.0'

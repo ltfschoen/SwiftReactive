@@ -1,0 +1,19 @@
+PODS:
+  - ReactiveFoundation (1.0.4):
+    - ReactiveKit
+  - ReactiveKit (1.0.9)
+  - ReactiveUIKit (1.0.9):
+    - ReactiveFoundation
+    - ReactiveKit
+
+DEPENDENCIES:
+  - ReactiveFoundation (~> 1.0)
+  - ReactiveKit (~> 1.0)
+  - ReactiveUIKit (~> 1.0)
+
+SPEC CHECKSUMS:
+  ReactiveFoundation: ea146bd578c3e9c9c5d0b2fc87320f10ac7917bb
+  ReactiveKit: 196fc1798b76b69d73325e49ed2a97f41d2c69a9
+  ReactiveUIKit: c8d1ef5f09981a1b70dc03f0fa263dafa06ee000
+
+COCOAPODS: 0.39.0
