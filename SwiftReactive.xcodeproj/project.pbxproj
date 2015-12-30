@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12CE09474389A7DD98560907 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC71E9BF9A69F62F580FCD1 /* Pods.framework */; };
+		495EE58D1C34780C006BF7EE /* TextFieldDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE58C1C34780C006BF7EE /* TextFieldDelegateExtension.swift */; };
 		49CAF3AA1C21285200708CFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CAF3A91C21285200708CFF /* AppDelegate.swift */; };
 		49CAF3AC1C21285200708CFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CAF3AB1C21285200708CFF /* ViewController.swift */; };
 		49CAF3AF1C21285200708CFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49CAF3AD1C21285200708CFF /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		3EC71E9BF9A69F62F580FCD1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		495EE58C1C34780C006BF7EE /* TextFieldDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegateExtension.swift; sourceTree = "<group>"; };
 		49CAF3A61C21285200708CFF /* SwiftReactive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftReactive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CAF3A91C21285200708CFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49CAF3AB1C21285200708CFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		495EE58B1C3477F5006BF7EE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				495EE58C1C34780C006BF7EE /* TextFieldDelegateExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		49CAF39D1C21285200708CFF = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +125,7 @@
 		49CAF3A81C21285200708CFF /* SwiftReactive */ = {
 			isa = PBXGroup;
 			children = (
+				495EE58B1C3477F5006BF7EE /* Extensions */,
 				49CAF3D71C21298000708CFF /* Podfile */,
 				49CAF3A91C21285200708CFF /* AppDelegate.swift */,
 				49CAF3AB1C21285200708CFF /* ViewController.swift */,
@@ -339,6 +350,7 @@
 			files = (
 				49CAF3AC1C21285200708CFF /* ViewController.swift in Sources */,
 				49CAF3AA1C21285200708CFF /* AppDelegate.swift in Sources */,
+				495EE58D1C34780C006BF7EE /* TextFieldDelegateExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
