@@ -1,0 +1,7 @@
+.DS_Store
+xcuserdata
+
+# git rm -r --cached SwiftReactive.xcodeproj/project.xcworkspace/xcuserdata
+# git rm -r --cached SwiftReactive/Pods/Pods.xcodeproj/xcuserdata
+# git rm -r --cached SwiftReactive/SwiftReactive.xcworkspace/xcuserdata
+# git rm .DS_Store
