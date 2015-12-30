@@ -8,5 +8,5 @@
 	```pod install```
 * Xcode > Product > Clean
 * Open the following file to load the project in Xcode (NOT .xcodeproj)
-	- /<INSTALLED_DIRECTORY>/SwiftReactive/SwiftReactive/SwiftReactive.xcworkspace
+	- /\<INSTALLED_DIRECTORY>/SwiftReactive/SwiftReactive/SwiftReactive.xcworkspace
 * Xcode > Product > Run
