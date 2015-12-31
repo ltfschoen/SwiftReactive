@@ -17,3 +17,7 @@
 * Click the green button to trigger an event action that changes an Observable property that has two-way binding defined with the Label 1 text. This is achieved using ```Observable<String>``` and ```.observe``` from ReactiveKit. Additionally Label 2 changes since it too has two-way binding with Label 1. This is achieved using ```bindTo``` from ReactiveKit.
 
 * Enter text into the Text Field to see it mirrored in Label 2 (when typing or deleting text) due to use of ```rText.bindTo``` from ReactiveKit.
+
+* Click the red button to remove both of the UILabels from the superview
+
+* Try entering text in the Text Field or clicking the green button again. The app does not crash even though a .bindTo is associated between these fields and the UILabel that was removed.
