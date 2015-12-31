@@ -14,11 +14,13 @@ class ViewController: UIViewController {
     var button1: UIButton?
     var button2: UIButton?
     var button3: UIButton?
-
+    var button4: UIButton?
     var label1: UILabel?
     var label2: UILabel?
 
     var labelCollection = ObservableCollection([UILabel]())
+
+    var disposableFetch: DisposableType?
 
     var textField1: UITextField?
 
@@ -38,6 +40,15 @@ class ViewController: UIViewController {
         self.button3!.titleLabel!.textAlignment = .Center
         self.button3!.addTarget(self, action: "button3ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button3!)
+
+        // Button 4
+        self.button4 = UIButton(type: UIButtonType.System) as UIButton
+        self.button4!.frame = CGRectMake(10, 160, 300, 20)
+        self.button4!.backgroundColor = UIColor.orangeColor()
+        self.button4!.setTitle("Cancel HTTP", forState: UIControlState.Normal)
+        self.button4!.titleLabel!.textAlignment = .Center
+        self.button4!.addTarget(self, action: "button4ClickAction", forControlEvents: .TouchUpInside)
+        self.view.addSubview(self.button4!)
 
         // Button 1
         self.button1 = UIButton(type: UIButtonType.System) as UIButton
@@ -138,7 +149,7 @@ class ViewController: UIViewController {
         // Bind (Text Field and Label 2
         self.textField1!.rText.bindTo(self.labelCollection[1])
 
-        fetchTitles().retry(0).observe(on: Queue.main.context) { event in
+        let disposableFetch = fetchTitles().retry(2).observe(on: Queue.main.async) { event in
             switch event {
             case .Next(let title):
                 print("Operation produced title \(title)")
@@ -147,6 +158,14 @@ class ViewController: UIViewController {
             case .Failure(let error):
                 print("Operation failed with error \(error)")
             }
+        }
+        self.disposableFetch = disposableFetch
+    }
+
+    func button4ClickAction() {
+        if self.disposableFetch != nil {
+            self.disposableFetch!.dispose()
+            print("Disposed: \(disposableFetch!.isDisposed)")
         }
     }
 
@@ -172,15 +191,53 @@ class ViewController: UIViewController {
                     print(request)  // original URL request
                     print(response) // URL response
                     print(data)     // server data
-
+    
                     if let error = error {
                         observer.failure(error)
                     } else {
                         if arr.count != 0 && self.labelCollection.count != 0 {
+
+                            sleep(3)
+
+                            let processGroup = dispatch_group_create()
+                            var blocks: [dispatch_block_t] = []
+
                             for i in 0 ..< arr.count {
-                                observer.next(arr[i])
-                                self.labelCollection[i].text! += " Success"
+                                dispatch_group_enter(processGroup)
+                                let block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {
+
+                                    /*
+                                    *  Closure not called on main queue for performance.
+                                    *  Update UI dispatched on main queue.
+                                    */
+                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+
+                                        observer.next(arr[i])
+                                        // Background task
+                                        dispatch_async(dispatch_get_main_queue()) {
+                                            // Update some UI
+                                            self.labelCollection[i].text! += " Success"
+                                            
+                                            dispatch_group_leave(processGroup)
+                                        }
+                                    })
+
+                                } // end block
+                                blocks.append(block)
+                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+
                             } // end for loop
+
+                            for block in blocks[0 ..< blocks.count] {
+                                if self.disposableFetch != nil {
+                                    let cancel = arc4random_uniform(2)
+                                    if cancel == 1 {
+                                        dispatch_block_cancel(block)
+                                        dispatch_group_leave(processGroup)
+                                    }
+                                }
+                            }
+
                         }
                         observer.success()
                     }
