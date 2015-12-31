@@ -54,7 +54,11 @@ class ViewController: UIViewController {
             self.label1Ref = Observable(self.label1Text!)
             self.label1Ref!.observe { (newLabel1Text) -> () in
                 print("Observed Label 1 Text Change: \(newLabel1Text)")
-                self.labelCollection[0].text = newLabel1Text
+
+                // Check if label is in view and not deleted before attempting to update
+                if self.labelCollection.count != 0 {
+                    self.labelCollection[0].text = newLabel1Text
+                }
             }
         } else {
             print("Error: Concrete Factory for Label Type not found")
@@ -93,13 +97,26 @@ class ViewController: UIViewController {
         // Bind (Text Field and Label 2
         self.textField1!.rText.bindTo(self.labelCollection[1])
 
-        self.deleteLabel(0)
-        self.deleteLabel(0)
+        // Button 2 (Delete All Labels
+        self.button2 = UIButton(type: UIButtonType.System) as UIButton
+        self.button2!.frame = CGRectMake(10, 150, 300, 50)
+        self.button2!.backgroundColor = UIColor.redColor()
+        self.button2!.setTitle("Click Button to Remove All Labels", forState: UIControlState.Normal)
+        self.button2!.titleLabel!.textAlignment = .Center
+        self.button2!.addTarget(self, action: "button2ClickAction", forControlEvents: .TouchUpInside)
+        self.view.addSubview(self.button2!)
     }
 
     func button1ClickAction() {
         self.label1Ref!.value = "Label 1 Text Changed"
 //        self.label1Ref!.next("Label 1 Text Changed")
+    }
+
+    func button2ClickAction() {
+        guard self.labelCollection.count != 0 else { return }
+
+        self.deleteLabel(0)
+        self.deleteLabel(0)
     }
 
     func deleteLabel(index: Int) {
