@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		12CE09474389A7DD98560907 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC71E9BF9A69F62F580FCD1 /* Pods.framework */; };
 		495EE58D1C34780C006BF7EE /* TextFieldDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE58C1C34780C006BF7EE /* TextFieldDelegateExtension.swift */; };
+		495EE5901C347CED006BF7EE /* LabelPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE58F1C347CED006BF7EE /* LabelPlans.swift */; };
+		495EE5921C34960E006BF7EE /* LabelConcrete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE5911C34960E006BF7EE /* LabelConcrete.swift */; };
+		495EE5941C34C16D006BF7EE /* LabelAbstract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE5931C34C16D006BF7EE /* LabelAbstract.swift */; };
+		495EE5961C34C4C5006BF7EE /* LabelParts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EE5951C34C4C5006BF7EE /* LabelParts.swift */; };
 		49CAF3AA1C21285200708CFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CAF3A91C21285200708CFF /* AppDelegate.swift */; };
 		49CAF3AC1C21285200708CFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CAF3AB1C21285200708CFF /* ViewController.swift */; };
 		49CAF3AF1C21285200708CFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49CAF3AD1C21285200708CFF /* Main.storyboard */; };
@@ -39,6 +43,10 @@
 /* Begin PBXFileReference section */
 		3EC71E9BF9A69F62F580FCD1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		495EE58C1C34780C006BF7EE /* TextFieldDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegateExtension.swift; sourceTree = "<group>"; };
+		495EE58F1C347CED006BF7EE /* LabelPlans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelPlans.swift; sourceTree = "<group>"; };
+		495EE5911C34960E006BF7EE /* LabelConcrete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelConcrete.swift; sourceTree = "<group>"; };
+		495EE5931C34C16D006BF7EE /* LabelAbstract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelAbstract.swift; sourceTree = "<group>"; };
+		495EE5951C34C4C5006BF7EE /* LabelParts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelParts.swift; sourceTree = "<group>"; };
 		49CAF3A61C21285200708CFF /* SwiftReactive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftReactive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CAF3A91C21285200708CFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49CAF3AB1C21285200708CFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +108,17 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		495EE58E1C347CD4006BF7EE /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				495EE5951C34C4C5006BF7EE /* LabelParts.swift */,
+				495EE58F1C347CED006BF7EE /* LabelPlans.swift */,
+				495EE5911C34960E006BF7EE /* LabelConcrete.swift */,
+				495EE5931C34C16D006BF7EE /* LabelAbstract.swift */,
+			);
+			name = Factory;
+			sourceTree = "<group>";
+		};
 		49CAF39D1C21285200708CFF = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +144,7 @@
 		49CAF3A81C21285200708CFF /* SwiftReactive */ = {
 			isa = PBXGroup;
 			children = (
+				495EE58E1C347CD4006BF7EE /* Factory */,
 				495EE58B1C3477F5006BF7EE /* Extensions */,
 				49CAF3D71C21298000708CFF /* Podfile */,
 				49CAF3A91C21285200708CFF /* AppDelegate.swift */,
@@ -349,8 +369,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				49CAF3AC1C21285200708CFF /* ViewController.swift in Sources */,
+				495EE5961C34C4C5006BF7EE /* LabelParts.swift in Sources */,
+				495EE5901C347CED006BF7EE /* LabelPlans.swift in Sources */,
 				49CAF3AA1C21285200708CFF /* AppDelegate.swift in Sources */,
 				495EE58D1C34780C006BF7EE /* TextFieldDelegateExtension.swift in Sources */,
+				495EE5921C34960E006BF7EE /* LabelConcrete.swift in Sources */,
+				495EE5941C34C16D006BF7EE /* LabelAbstract.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
