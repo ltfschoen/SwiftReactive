@@ -23,3 +23,7 @@
 * Click the red button to remove both of the UILabels from the superview
 
 * Try entering text in the Text Field or clicking the green button again. The app does not crash even though a .bindTo is associated between these fields and the UILabel that was removed.
+
+# Issues
+
+* Unsuccessfully attempted to add a Cancel HTTP Request button (temperamental in that sometimes both UILabels are appended with "Success" text, whilst other times only one or neither update, and sometimes app crashes). Code associated with this attempt is available in this branch: [alamofire_cancel](https://github.com/ltfschoen/SwiftReactive/tree/alamofire_cancel)
