@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     var button1: UIButton?
     var button2: UIButton?
+    var button3: UIButton?
     var label1: UILabel?
     var label2: UILabel?
 
@@ -27,11 +28,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        // Button 3
+        self.button3 = UIButton(type: UIButtonType.System) as UIButton
+        self.button3!.frame = CGRectMake(10, 160, 300, 20)
+        self.button3!.backgroundColor = UIColor.blueColor()
+        self.button3!.setTitle("Click to Create Labels 1 and 2", forState: UIControlState.Normal)
+        self.button3!.titleLabel!.textAlignment = .Center
+        self.button3!.addTarget(self, action: "button3ClickAction", forControlEvents: .TouchUpInside)
+        self.view.addSubview(self.button3!)
+
         // Button 1
         self.button1 = UIButton(type: UIButtonType.System) as UIButton
-        self.button1!.frame = CGRectMake(10, 200, 300, 50)
+        self.button1!.frame = CGRectMake(10, 200, 300, 20)
         self.button1!.backgroundColor = UIColor.greenColor()
-        self.button1!.setTitle("Click Button to Change Label 1 Text", forState: UIControlState.Normal)
+        self.button1!.setTitle("Click to Change Label 1 Text (Label 2 Bind)", forState: UIControlState.Normal)
         self.button1!.titleLabel!.textAlignment = .Center
         self.button1!.addTarget(self, action: "button1ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button1!)
@@ -39,47 +49,6 @@ class ViewController: UIViewController {
         labelCollection.observe { e in
             print("array: \(e.collection), inserts: \(e.inserts), deletes: \(e.deletes), updates: \(e.updates)")
         }
-
-        // Label 1
-        let factoryWhite = LabelFactory.getFactory(Labels.WHITE)
-
-        if factoryWhite != nil {
-            let labelWhite = Label(labelType: Labels.WHITE, labelPlan: factoryWhite!.createLabelPlan())
-            labelWhite.printDetails()
-            self.label1Text = "Label 1 Text"
-            self.labelCollection.append(labelWhite.labelPlan.label)
-            self.labelCollection[0].text = self.label1Text
-            self.view.addSubview(self.labelCollection[0])
-
-            self.label1Ref = Observable(self.label1Text!)
-            self.label1Ref!.observe { (newLabel1Text) -> () in
-                print("Observed Label 1 Text Change: \(newLabel1Text)")
-
-                // Check if label is in view and not deleted before attempting to update
-                if self.labelCollection.count != 0 {
-                    self.labelCollection[0].text = newLabel1Text
-                }
-            }
-        } else {
-            print("Error: Concrete Factory for Label Type not found")
-        }
-
-        // Label 2
-        let factoryBlack = LabelFactory.getFactory(Labels.BLACK)
-
-        if factoryBlack != nil {
-            let labelBlack = Label(labelType: Labels.BLACK, labelPlan: factoryBlack!.createLabelPlan())
-            labelBlack.printDetails()
-            self.label2Text = "Label 2 Text"
-            self.labelCollection.append(labelBlack.labelPlan.label)
-            self.labelCollection[1].text = self.label2Text
-            self.view.addSubview(self.labelCollection[1])
-        } else {
-            print("Error: Concrete Factory for Label Type not found")
-        }
-
-        // Bind (Label 1 and Label 2)
-        self.label1Ref!.bindTo(self.labelCollection[1])
 
         // Text Field 1
         self.textField1 = UITextField(frame: CGRectMake(10, 250, 300, 40))
@@ -94,20 +63,19 @@ class ViewController: UIViewController {
         self.textField1!.delegate = self
         self.view.addSubview(self.textField1!)
 
-        // Bind (Text Field and Label 2
-        self.textField1!.rText.bindTo(self.labelCollection[1])
-
         // Button 2 (Delete All Labels
         self.button2 = UIButton(type: UIButtonType.System) as UIButton
-        self.button2!.frame = CGRectMake(10, 150, 300, 50)
+        self.button2!.frame = CGRectMake(10, 180, 300, 20)
         self.button2!.backgroundColor = UIColor.redColor()
-        self.button2!.setTitle("Click Button to Remove All Labels", forState: UIControlState.Normal)
+        self.button2!.setTitle("Click to Remove All Labels", forState: UIControlState.Normal)
         self.button2!.titleLabel!.textAlignment = .Center
         self.button2!.addTarget(self, action: "button2ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button2!)
     }
 
     func button1ClickAction() {
+        guard self.labelCollection.count != 0 else { return }
+
         self.label1Ref!.value = "Label 1 Text Changed"
 //        self.label1Ref!.next("Label 1 Text Changed")
     }
@@ -117,6 +85,56 @@ class ViewController: UIViewController {
 
         self.deleteLabel(0)
         self.deleteLabel(0)
+    }
+
+    func button3ClickAction() {
+
+        // Only recreate both buttons when no buttons exist
+        guard self.labelCollection.count == 0 else { return }
+
+        // Label 1
+        let factoryWhite = LabelFactory.getFactory(Labels.WHITE)
+        
+        if factoryWhite != nil {
+            let labelWhite = Label(labelType: Labels.WHITE, labelPlan: factoryWhite!.createLabelPlan())
+            labelWhite.printDetails()
+            self.label1Text = "Label 1 Text"
+            self.labelCollection.append(labelWhite.labelPlan.label)
+            self.labelCollection[0].text = self.label1Text
+            self.view.addSubview(self.labelCollection[0])
+            
+            self.label1Ref = Observable(self.label1Text!)
+            self.label1Ref!.observe { (newLabel1Text) -> () in
+                print("Observed Label 1 Text Change: \(newLabel1Text)")
+                
+                // Check if label is in view and not deleted before attempting to update
+                if self.labelCollection.count != 0 {
+                    self.labelCollection[0].text = newLabel1Text
+                }
+            }
+        } else {
+            print("Error: Concrete Factory for Label Type not found")
+        }
+        
+        // Label 2
+        let factoryBlack = LabelFactory.getFactory(Labels.BLACK)
+        
+        if factoryBlack != nil {
+            let labelBlack = Label(labelType: Labels.BLACK, labelPlan: factoryBlack!.createLabelPlan())
+            labelBlack.printDetails()
+            self.label2Text = "Label 2 Text"
+            self.labelCollection.append(labelBlack.labelPlan.label)
+            self.labelCollection[1].text = self.label2Text
+            self.view.addSubview(self.labelCollection[1])
+        } else {
+            print("Error: Concrete Factory for Label Type not found")
+        }
+        
+        // Bind (Label 1 and Label 2)
+        self.label1Ref!.bindTo(self.labelCollection[1])
+
+        // Bind (Text Field and Label 2
+        self.textField1!.rText.bindTo(self.labelCollection[1])
     }
 
     func deleteLabel(index: Int) {
