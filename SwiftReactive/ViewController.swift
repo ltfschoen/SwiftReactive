@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
     var button1: UIButton?
     var button2: UIButton?
     var button3: UIButton?
+
     var label1: UILabel?
     var label2: UILabel?
 
@@ -30,9 +32,9 @@ class ViewController: UIViewController {
 
         // Button 3
         self.button3 = UIButton(type: UIButtonType.System) as UIButton
-        self.button3!.frame = CGRectMake(10, 160, 300, 20)
+        self.button3!.frame = CGRectMake(10, 140, 300, 20)
         self.button3!.backgroundColor = UIColor.blueColor()
-        self.button3!.setTitle("Click to Create Labels 1 and 2", forState: UIControlState.Normal)
+        self.button3!.setTitle("Click to Create Labels 1 and 2 with HTTP", forState: UIControlState.Normal)
         self.button3!.titleLabel!.textAlignment = .Center
         self.button3!.addTarget(self, action: "button3ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button3!)
@@ -135,6 +137,58 @@ class ViewController: UIViewController {
 
         // Bind (Text Field and Label 2
         self.textField1!.rText.bindTo(self.labelCollection[1])
+
+        fetchTitles().retry(0).observe(on: Queue.main.context) { event in
+            switch event {
+            case .Next(let title):
+                print("Operation produced title \(title)")
+            case .Success:
+                print("Operation successful")
+            case .Failure(let error):
+                print("Operation failed with error \(error)")
+            }
+        }
+    }
+
+    /**
+    *  ReactiveKit Operation wraps HTTP request for observation.
+    *  Operation closure that performs the HTTP request is passed to constructor and
+    *  takes an 'observer' argument for sending events about the operation state using .next
+    *  method.
+    */
+    func fetchTitles() -> Operation<String, NSError> {
+
+        // Declare object to be registered as observer and passed to closure in the operation constructor
+        var arr: [String] = []
+        if self.label1Text != nil && self.label2Text != nil {
+            arr.append(self.label1Text!)
+            arr.append(self.label2Text!)
+        }
+
+        return Operation { observer in
+
+            let request = Alamofire.request(.GET, "https://httpbin.org/get", parameters: ["key": "value"])
+                .response { request, response, data, error in
+                    print(request)  // original URL request
+                    print(response) // URL response
+                    print(data)     // server data
+
+                    if let error = error {
+                        observer.failure(error)
+                    } else {
+                        if arr.count != 0 && self.labelCollection.count != 0 {
+                            for i in 0 ..< arr.count {
+                                observer.next(arr[i])
+                                self.labelCollection[i].text! += " Success"
+                            } // end for loop
+                        }
+                        observer.success()
+                    }
+                }
+            return BlockDisposable {
+                request.cancel()
+            }
+        }
     }
 
     func deleteLabel(index: Int) {
