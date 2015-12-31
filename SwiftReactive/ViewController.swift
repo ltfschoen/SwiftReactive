@@ -49,6 +49,8 @@ class ViewController: UIViewController {
                 print("Observed Label 1 Text Change: \(newLabel1Text)")
                 labelWhite.labelPlan.label!.text = newLabel1Text
             }
+        } else {
+            print("Error: Concrete Factory for Label Type not found")
         }
 
         // Label 2
@@ -60,6 +62,8 @@ class ViewController: UIViewController {
             self.label2 = labelBlack.labelPlan.label
             self.label2!.text = self.label2Text
             self.view.addSubview(self.label2!)
+        } else {
+            print("Error: Concrete Factory for Label Type not found")
         }
 
         // Bind (Label 1 and Label 2)
