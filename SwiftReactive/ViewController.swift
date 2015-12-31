@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     var button2: UIButton?
     var label1: UILabel?
     var label2: UILabel?
+
+    var labelCollection = ObservableCollection([UILabel]())
+
     var textField1: UITextField?
 
     var label1Text: String?
@@ -33,6 +36,10 @@ class ViewController: UIViewController {
         self.button1!.addTarget(self, action: "button1ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button1!)
 
+        labelCollection.observe { e in
+            print("array: \(e.collection), inserts: \(e.inserts), deletes: \(e.deletes), updates: \(e.updates)")
+        }
+
         // Label 1
         let factoryWhite = LabelFactory.getFactory(Labels.WHITE)
 
@@ -40,14 +47,18 @@ class ViewController: UIViewController {
             let labelWhite = Label(labelType: Labels.WHITE, labelPlan: factoryWhite!.createLabelPlan())
             labelWhite.printDetails()
             self.label1Text = "Label 1 Text"
-            self.label1 = labelWhite.labelPlan.label
-            self.label1!.text = self.label1Text
-            self.view.addSubview(self.label1!)
+            self.labelCollection.append(labelWhite.labelPlan.label)
+            self.labelCollection[0].text = self.label1Text
+            self.view.addSubview(self.labelCollection[0])
 
             self.label1Ref = Observable(self.label1Text!)
             self.label1Ref!.observe { (newLabel1Text) -> () in
                 print("Observed Label 1 Text Change: \(newLabel1Text)")
-                labelWhite.labelPlan.label!.text = newLabel1Text
+
+                // Check if label is in view and not deleted before attempting to update
+                if self.labelCollection.count != 0 {
+                    self.labelCollection[0].text = newLabel1Text
+                }
             }
         } else {
             print("Error: Concrete Factory for Label Type not found")
@@ -59,15 +70,16 @@ class ViewController: UIViewController {
         if factoryBlack != nil {
             let labelBlack = Label(labelType: Labels.BLACK, labelPlan: factoryBlack!.createLabelPlan())
             labelBlack.printDetails()
-            self.label2 = labelBlack.labelPlan.label
-            self.label2!.text = self.label2Text
-            self.view.addSubview(self.label2!)
+            self.label2Text = "Label 2 Text"
+            self.labelCollection.append(labelBlack.labelPlan.label)
+            self.labelCollection[1].text = self.label2Text
+            self.view.addSubview(self.labelCollection[1])
         } else {
             print("Error: Concrete Factory for Label Type not found")
         }
 
         // Bind (Label 1 and Label 2)
-        self.label1Ref!.bindTo(self.label2!)
+        self.label1Ref!.bindTo(self.labelCollection[1])
 
         // Text Field 1
         self.textField1 = UITextField(frame: CGRectMake(10, 250, 300, 40))
@@ -83,12 +95,45 @@ class ViewController: UIViewController {
         self.view.addSubview(self.textField1!)
 
         // Bind (Text Field and Label 2
-        self.textField1!.rText.bindTo(self.label2!)
+        self.textField1!.rText.bindTo(self.labelCollection[1])
+
+        // Button 2 (Delete All Labels
+        self.button2 = UIButton(type: UIButtonType.System) as UIButton
+        self.button2!.frame = CGRectMake(10, 150, 300, 50)
+        self.button2!.backgroundColor = UIColor.redColor()
+        self.button2!.setTitle("Click Button to Remove All Labels", forState: UIControlState.Normal)
+        self.button2!.titleLabel!.textAlignment = .Center
+        self.button2!.addTarget(self, action: "button2ClickAction", forControlEvents: .TouchUpInside)
+        self.view.addSubview(self.button2!)
     }
 
     func button1ClickAction() {
         self.label1Ref!.value = "Label 1 Text Changed"
 //        self.label1Ref!.next("Label 1 Text Changed")
+    }
+
+    func button2ClickAction() {
+        guard self.labelCollection.count != 0 else { return }
+
+        self.deleteLabel(0)
+        self.deleteLabel(0)
+    }
+
+    func deleteLabel(index: Int) {
+        print("Request to delete label at index: \(self.labelCollection[index])")
+        /*
+        *  Check if UILabel exists at provided index.
+        *  Temporarily store UILabel at index so available to remove from both array and view
+        */
+        if let labelRefAtIndex: UILabel? = self.labelCollection[index] {
+            // Remove label at index in the array before deleting it from the array
+            self.labelCollection[index].removeFromSuperview()
+            // Check at least one label in array before deleting
+            print("Collection count is: \(self.labelCollection.count)")
+            if self.labelCollection.count != 0 {
+                self.labelCollection.removeAtIndex(index)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
