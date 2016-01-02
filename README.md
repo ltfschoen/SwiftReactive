@@ -2,6 +2,7 @@ Progress
 ========
 
 - [x] **ReactiveKit** implemented
+- [x] **Abstract Factory design pattern** implemented
 - [x] **VIPER architecture** implemented (non-MV(X)) having layers including Presenter, Interactor (with Data), Entity (of Data), View, and Router. Refer [here](https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52#.5rsr96dhp) for information
 - [ ] **Application Coordinator** implementation using this [guide](https://slack-files.com/T051G5Y6D-F0HABHKDK-8e9141e191)
 - [ ] Unit Testing using VIPER architecture
