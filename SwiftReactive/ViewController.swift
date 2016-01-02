@@ -9,7 +9,15 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, LabelMsgView {
+
+    // START - VIPER
+    var eventHandler: LabelMsgViewEventHandler!
+    var showLabelMsgButton: UIButton?
+    var labelMsgLabel: UILabel?
+    var presenter: LabelMsgPresenter?
+    var interactor: DataMsgInteractor?
+    // END - VIPER
 
     var button1: UIButton?
     var button2: UIButton?
@@ -29,6 +37,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        // START - VIPER
+        self.presenter = LabelMsgPresenter()
+        self.interactor = DataMsgInteractor()
+        self.eventHandler = self.presenter
+        self.presenter!.view = self
+        self.presenter!.labelMsgProvider = self.interactor
+        self.interactor!.output = self.presenter
+
+        self.showLabelMsgButton = UIButton(type: UIButtonType.System) as UIButton
+        self.showLabelMsgButton!.frame = CGRectMake(10, 300, 300, 20)
+        self.showLabelMsgButton!.backgroundColor = UIColor.yellowColor()
+        self.showLabelMsgButton!.setTitle("VIPER Placeholder Title", forState: UIControlState.Normal)
+        self.showLabelMsgButton!.titleLabel!.textAlignment = .Center
+        self.view.addSubview(self.showLabelMsgButton!)
+        self.showLabelMsgButton!.addTarget(self, action: "didClickShowLabelMsgButton:", forControlEvents: .TouchUpInside)
+
+        self.labelMsgLabel = UILabel(frame: CGRectMake(10, 320, 300, 20))
+        self.labelMsgLabel!.backgroundColor = UIColor.whiteColor()
+        self.labelMsgLabel!.textAlignment = NSTextAlignment.Center
+        self.labelMsgLabel!.text = "VIPER Placeholder Message"
+        self.view.addSubview(self.labelMsgLabel!)
+        // END - VIPER
 
         // Button 3
         self.button3 = UIButton(type: UIButtonType.System) as UIButton
@@ -74,6 +105,16 @@ class ViewController: UIViewController {
         self.button2!.addTarget(self, action: "button2ClickAction", forControlEvents: .TouchUpInside)
         self.view.addSubview(self.button2!)
     }
+
+    // START - VIPER Protocol Methods
+    func didClickShowLabelMsgButton(button: UIButton) {
+        self.eventHandler.didClickShowLabelMsgButton()
+    }
+    
+    func setLabelMsg(labelMsg: String) {
+        self.labelMsgLabel!.text = labelMsg
+    }
+    // END - VIPER Protocol Methods
 
     func button1ClickAction() {
         guard self.labelCollection.count != 0 else { return }

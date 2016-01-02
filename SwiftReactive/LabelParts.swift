@@ -14,6 +14,7 @@ enum Labels: String {
     case BLACK = "Black"
 }
 
+// Entity
 struct Label {
     var labelType: Labels
     var labelPlan: LabelPlan
