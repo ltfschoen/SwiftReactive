@@ -1,4 +1,14 @@
-# Setup Guide
+Progress
+========
+
+- [x] **ReactiveKit** implemented
+- [x] **VIPER architecture** implemented (non-MV(X)) having layers including Presenter, Interactor (with Data), Entity (of Data), View, and Router. Refer [here](https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52#.5rsr96dhp) for information
+- [ ] **Application Coordinator** implementation using this [guide](https://slack-files.com/T051G5Y6D-F0HABHKDK-8e9141e191)
+- [ ] Unit Testing using VIPER architecture
+- [ ] Use Generamba to create VIPER skeleton
+
+Setup Guide
+========
 
 * Update CocoaPods to 0.39.0 to prevent incompatibility issues
 	- ```sudo gem install cocoapods```
@@ -10,7 +20,8 @@
 * Open the following file to load the project in Xcode (NOT .xcodeproj)
 	- /\<INSTALLED_DIRECTORY>/SwiftReactive/SwiftReactive/SwiftReactive.xcworkspace
 
-# Usage
+Usage
+========
 
 * Xcode > Product > Run
 
@@ -24,6 +35,7 @@
 
 * Try entering text in the Text Field or clicking the green button again. The app does not crash even though a .bindTo is associated between these fields and the UILabel that was removed.
 
-# Issues
+Issues
+========
 
-* Unsuccessfully attempted to add a Cancel HTTP Request button (temperamental in that sometimes both UILabels are appended with "Success" text, whilst other times only one or neither update, and sometimes app crashes). Code associated with this attempt is available in this branch: [alamofire_cancel](https://github.com/ltfschoen/SwiftReactive/tree/alamofire_cancel)
+* **Optional** Unsuccessfully attempted to add a Cancel HTTP Request button (temperamental in that sometimes both UILabels are appended with "Success" text, whilst other times only one or neither update, and sometimes app crashes). Code associated with this attempt is available in this branch: [alamofire_cancel](https://github.com/ltfschoen/SwiftReactive/tree/alamofire_cancel)
