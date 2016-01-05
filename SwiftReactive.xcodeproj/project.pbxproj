@@ -311,6 +311,7 @@
 				TargetAttributes = {
 					49CAF3A51C21285200708CFF = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = VWNSUBS8K9;
 					};
 					49CAF3B91C21285200708CFF = {
 						CreatedOnToolsVersion = 7.2;
@@ -577,10 +578,15 @@
 			baseConfigurationReference = 755F86CBBD703346267362F2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Luke Schoen (BZ335LHEY2)";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				INFOPLIST_FILE = SwiftReactive/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukeschoen.SwiftReactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fefcae9a-0518-4201-8921-bc1b820eda13";
 				SWIFT_OBJC_BRIDGING_HEADER = SwiftReactive/ObjCBridging.h;
 			};
 			name = Debug;
@@ -590,10 +596,15 @@
 			baseConfigurationReference = 5D4B45F98A5BDEDC778C2EAE /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Luke Schoen (BZ335LHEY2)";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				INFOPLIST_FILE = SwiftReactive/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukeschoen.SwiftReactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fefcae9a-0518-4201-8921-bc1b820eda13";
 				SWIFT_OBJC_BRIDGING_HEADER = SwiftReactive/ObjCBridging.h;
 			};
 			name = Release;
