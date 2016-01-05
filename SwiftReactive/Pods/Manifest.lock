@@ -2,8 +2,8 @@ PODS:
   - Alamofire (3.1.4)
   - ReactiveFoundation (1.0.4):
     - ReactiveKit
-  - ReactiveKit (1.0.9)
-  - ReactiveUIKit (1.0.9):
+  - ReactiveKit (1.1.2)
+  - ReactiveUIKit (1.0.10):
     - ReactiveFoundation
     - ReactiveKit
 
@@ -16,7 +16,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   ReactiveFoundation: ea146bd578c3e9c9c5d0b2fc87320f10ac7917bb
-  ReactiveKit: 196fc1798b76b69d73325e49ed2a97f41d2c69a9
-  ReactiveUIKit: c8d1ef5f09981a1b70dc03f0fa263dafa06ee000
+  ReactiveKit: 63d00d64e93d29c60cd034601da083d52b415a9a
+  ReactiveUIKit: b3abc88e716ebd60f9c08708ee148e4b8e94c137
 
 COCOAPODS: 0.39.0

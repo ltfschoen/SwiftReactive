@@ -1,0 +1,9 @@
+[caps]
+platformName = "ios"
+platformVersion = "9.2"
+deviceName ="iPhone Simulator"
+app = "~/Library/Developer/Xcode/DerivedData/SwiftReactive-gaeivagrucoejtcrhhedjdhsdhnc/Build/Products/Debug-iphonesimulator/SwiftReactive.app"
+
+[appium_lib]
+sauce_username = ""
+sauce_access_key = ""
